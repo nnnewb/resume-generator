@@ -43,6 +43,7 @@ func main() {
 		}
 		log.Fatal(err)
 	}
+	log.Printf("使用模板: %s", templateDirPath)
 
 	inputYAML = filepath.Clean(inputYAML)
 	if _, err := os.Stat(inputYAML); err != nil {
@@ -52,6 +53,7 @@ func main() {
 		}
 		log.Fatal(err)
 	}
+	log.Printf("使用简历数据: %s", inputYAML)
 
 	watcher, err := fsnotify.NewWatcher()
 	if err != nil {
@@ -60,7 +62,7 @@ func main() {
 	defer watcher.Close()
 
 	if err := livepreview.WatchDir(templateDirPath, watcher); err != nil {
-		log.Fatal(err)
+		log.Fatalf("添加 fsnotify 监视失败, 错误 %+v", err)
 	}
 
 	if err = watcher.Add(inputYAML); err != nil {

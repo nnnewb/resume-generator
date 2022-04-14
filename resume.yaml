@@ -6,3 +6,26 @@ Me:
     EMail: hello@world.com
   SocialMedia:
     GitHub: hello
+
+Introduction: |
+  我是谁；我做过什么；我会哪些技能；
+
+WorkExperience:
+- Organization: 酒厂
+  Title: 开发者
+  TimeRange:
+    From: "2000-01-01"
+    To: 现在
+  Projects:
+  - Name: 项目名
+    Introduction: 项目介绍
+    Responsibility: 在项目中的职责范围
+    Achievements: 工作成果
+  - Name: 项目名
+    Introduction: 项目介绍
+    Responsibility: 在项目中的职责范围
+    Achievements: 工作成果
+  - Name: 项目名
+    Introduction: 项目介绍
+    Responsibility: 在项目中的职责范围
+    Achievements: 工作成果

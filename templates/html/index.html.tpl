@@ -6,17 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>简历</title>
     <script src="/static/js/live.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flexboxgrid@6.3.1/dist/flexboxgrid.min.css"
+    />
+    <link rel="stylesheet" href="/static/css/base.css" />
   </head>
   <body>
-    <div class="page">
-      <div class="head">
-        <div class="head-left">
+    <div class="container">
+      <!-- name card -->
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-16 col-xs-12">
           <h2 class="name">
             {{ .Me.Name }}
             <small class="title">{{ .Me.Title }}</small>
           </h2>
         </div>
-        <div class="head-right">
+        <div class="col-lg-6 col-md-6 col-sm-16 col-xs-12">
           <p class="text-right">手机号码：{{ .Me.Contact.Phone }}</p>
           <p class="text-right">邮箱：{{ .Me.Contact.EMail }}</p>
           <p class="text-right">
@@ -27,39 +33,40 @@
           </p>
         </div>
       </div>
+
+      <!-- introduction your self -->
+      <div class="row">
+        {{ .Introduction }}
+      </div>
+
+      <hr />
+
+      <!-- show work experience -->
+      <div class="container">
+        {{ range .WorkExperience }}
+        <!-- head line -->
+        <div class="row">
+          <h3>
+            {{ .Organization }} <small>{{ .Title }}</small>
+          </h3>
+        </div>
+
+        <div class="row end-xs text-right text-gray">
+          <p>{{ .TimeRange.From }} - {{ .TimeRange.To }}</p>
+        </div>
+
+        <!-- project introduction -->
+        {{ range .Projects }}
+        <div class="row">
+          任职期间负责项目{{.Name}}，工作职责包括{{ .Responsibility}}。
+        </div>
+        <div class="row">{{ .Introduction }}</div>
+        <div class="row">{{ .Achievements }}</div>
+        {{ end }}
+        {{ end }}
+      </div>
+
+      <!-- show open source projects -->
     </div>
   </body>
-  <style>
-    .text-right {
-      text-align: right;
-    }
-  </style>
-  <style>
-    .page {
-      margin: auto;
-      max-width: 1080px;
-    }
-    .head {
-      height: 155px;
-      width: 100%;
-      display: flex;
-    }
-    .head-left {
-      width: 50%;
-      padding: 0;
-      margin: 0;
-    }
-    .head-right {
-      padding-top: 2.5em;
-      width: 50%;
-      vertical-align: top;
-      line-height: 1em;
-    }
-    .name {
-      font-size: 42px;
-    }
-    .name > .title {
-      color: gray;
-    }
-  </style>
 </html>

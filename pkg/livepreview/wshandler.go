@@ -9,6 +9,7 @@ import (
 
 	"github.com/fsnotify/fsnotify"
 	"github.com/gorilla/websocket"
+	"github.com/pkg/errors"
 )
 
 type M map[string]interface{}
@@ -16,12 +17,12 @@ type M map[string]interface{}
 func WatchDir(path string, watcher *fsnotify.Watcher) error {
 	return filepath.WalkDir(path, func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
-			return err
+			return errors.Wrapf(err, "%s: 访问目录出错", path)
 		}
 
-		err = watcher.Add(filepath.Join(path, d.Name()))
+		err = watcher.Add(path)
 		if err != nil {
-			return err
+			return errors.Wrapf(err, "%s: 目录添加监视失败", filepath.Join(path))
 		}
 
 		return nil
