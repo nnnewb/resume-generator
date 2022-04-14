@@ -10,18 +10,19 @@ import (
 	"path/filepath"
 
 	"github.com/fsnotify/fsnotify"
+	"github.com/nnnewb/resume-generator/pkg/livepreview"
 	"gopkg.in/yaml.v3"
 )
 
 func main() {
 	var (
-		templateFilePath string
-		inputYAML        string
+		templateDirPath string
+		inputYAML       string
 	)
 
-	flag.StringVar(&templateFilePath, "template", "", "模板文件路径")
+	flag.StringVar(&templateDirPath, "template", "", "模板文件夹路径")
 	flag.Parse()
-	if templateFilePath == "" {
+	if templateDirPath == "" {
 		println("resume-generator -template <template.tpl> <resume.yaml>")
 		flag.Usage()
 		log.Fatal("必须提供 -template 选项")
@@ -34,12 +35,13 @@ func main() {
 		log.Fatal("必须提供简历数据 yaml")
 	}
 
-	templateFilePath = filepath.Clean(templateFilePath)
-	if _, err := os.Stat(templateFilePath); err != nil {
+	templateDirPath = filepath.Clean(templateDirPath)
+	if _, err := os.Stat(filepath.Join(templateDirPath, "index.html.tpl")); err != nil {
 		if os.IsNotExist(err) {
-			log.Fatalf("%s: 文件不存在", templateFilePath)
+			log.Fatalf("%s/index.html.tpl: 文件不存在", templateDirPath)
 			return
 		}
+		log.Fatal(err)
 	}
 
 	inputYAML = filepath.Clean(inputYAML)
@@ -48,6 +50,7 @@ func main() {
 			log.Fatalf("%s: 文件不存在", inputYAML)
 			return
 		}
+		log.Fatal(err)
 	}
 
 	watcher, err := fsnotify.NewWatcher()
@@ -56,30 +59,28 @@ func main() {
 	}
 	defer watcher.Close()
 
-	err = watcher.Add(inputYAML)
-	if err != nil {
+	if err := livepreview.WatchDir(templateDirPath, watcher); err != nil {
 		log.Fatal(err)
 	}
 
-	err = watcher.Add(templateFilePath)
-	if err != nil {
+	if err = watcher.Add(inputYAML); err != nil {
 		log.Fatal(err)
 	}
 
-	go func() {
-		for {
-			err := <-watcher.Errors
-			if err != nil {
-				log.Printf("fsnotify 错误: %s", err.Error())
-			}
-		}
-	}()
+	// redirect to /resume
+	http.Handle("^/$", http.RedirectHandler("/resume", http.StatusPermanentRedirect))
 
-	http.Handle("/", http.RedirectHandler("/resume", http.StatusPermanentRedirect))
+	// serve websocket
+	http.Handle("/ws", livepreview.MakeWebSocketHandler(watcher))
+
+	// serve template static files
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir(filepath.Join(templateDirPath, "static")))))
+
+	// render index.html.tpl with
 	http.Handle("/resume", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		tpl := template.New("index.html")
 
-		bytes, err := os.ReadFile(templateFilePath)
+		bytes, err := os.ReadFile(filepath.Join(templateDirPath, "index.html.tpl"))
 		if err != nil {
 			w.Write([]byte(fmt.Sprintf("template read error: %v", err)))
 			return
