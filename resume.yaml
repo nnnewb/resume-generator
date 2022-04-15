@@ -6,6 +6,17 @@ Me:
     EMail: hello@world.com
   SocialMedia:
     GitHub: hello
+  Skills:
+  - C/C++
+  - Go
+  - Python
+  - TypeScript/JavaScript
+  - Docker
+  - Kubernetes
+  - Linux
+  - gRPC
+  - Micro Service
+  - CI/CD
 
 Introduction: |
   我是谁；我做过什么；我会哪些技能；
@@ -18,14 +29,61 @@ WorkExperience:
     To: 现在
   Projects:
   - Name: 项目名
+    Stack: 技术栈
     Introduction: 项目介绍
     Responsibility: 在项目中的职责范围
     Achievements: 工作成果
   - Name: 项目名
+    Stack: 技术栈
     Introduction: 项目介绍
     Responsibility: 在项目中的职责范围
     Achievements: 工作成果
   - Name: 项目名
+    Stack: 技术栈
     Introduction: 项目介绍
     Responsibility: 在项目中的职责范围
     Achievements: 工作成果
+
+CommunityContribution:
+- Name: 开源项目名
+  Link: github.com/your/project
+  Stack: 技术栈
+  Introduction: 项目介绍
+- Name: 开源项目名
+  Link: github.com/your/project
+  Stack: 技术栈
+  Introduction: 项目介绍
+- Name: 开源项目名
+  Link: github.com/your/project
+  Stack: 技术栈
+  Introduction: 项目介绍
+- Name: 开源项目名
+  Link: github.com/your/project
+  Stack: 技术栈
+  Introduction: 项目介绍
+
+Researches:
+- Title: 文章标题
+  Link: 文章链接
+- Title: 文章标题
+  Link: 文章链接
+- Title: 文章标题
+  Link: 文章链接
+- Title: 文章标题
+  Link: 文章链接
+- Title: 文章标题
+  Link: 文章链接
+
+Education:
+  History:
+  - School: 某学校
+    Grade: 本科
+  - School: 某学校
+    Grade: 硕士
+  Achievements:
+  - Honor: 某比赛一等奖
+  - Honor: 学生会主席
+  - Honor: 别的什么能写上去的东西
+
+Thanks: |
+  感谢 CCTV

@@ -5,3 +5,27 @@
 .text-gray {
   color: gray;
 }
+
+.oss-contribution {
+  padding-right: 2em;
+  padding-left: 2em;
+}
+
+.oss-contribution-name {
+  font-weight: 600;
+  font-size: 1.2em;
+}
+
+a {
+  color: #1961a8;
+  text-decoration-line: none;
+}
+
+.oss-contribution-stack {
+  font-size: 14px;
+  color: gray;
+}
+
+.oss-contribution-introduction {
+  text-indent: 2em;
+}

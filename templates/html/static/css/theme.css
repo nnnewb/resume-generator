@@ -1,0 +1,251 @@
+/* copy from Typora github(light) theme */
+
+:root {
+  --side-bar-bg-color: #fafafa;
+  --control-text-color: #777;
+}
+
+/* open-sans-regular - latin-ext_latin */
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Open Sans Regular"), local("OpenSans-Regular"),
+    url("./github/open-sans-v17-latin-ext_latin-regular.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD, U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* open-sans-italic - latin-ext_latin */
+@font-face {
+  font-family: "Open Sans";
+  font-style: italic;
+  font-weight: normal;
+  src: local("Open Sans Italic"), local("OpenSans-Italic"),
+    url("./github/open-sans-v17-latin-ext_latin-italic.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD, U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* open-sans-700 - latin-ext_latin */
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: bold;
+  src: local("Open Sans Bold"), local("OpenSans-Bold"),
+    url("./github/open-sans-v17-latin-ext_latin-700.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD, U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* open-sans-700italic - latin-ext_latin */
+@font-face {
+  font-family: "Open Sans";
+  font-style: italic;
+  font-weight: bold;
+  src: local("Open Sans Bold Italic"), local("OpenSans-BoldItalic"),
+    url("./github/open-sans-v17-latin-ext_latin-700italic.woff2")
+      format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD, U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: "Open Sans", "Clear Sans", "Helvetica Neue", Helvetica, Arial,
+    "Segoe UI Emoji", sans-serif;
+  color: rgb(51, 51, 51);
+  line-height: 1.6;
+}
+
+a {
+  color: #4183c4;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  position: relative;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  line-height: 1.4;
+  cursor: text;
+}
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+  text-decoration: none;
+}
+h1 tt,
+h1 code {
+  font-size: inherit;
+}
+h2 tt,
+h2 code {
+  font-size: inherit;
+}
+h3 tt,
+h3 code {
+  font-size: inherit;
+}
+h4 tt,
+h4 code {
+  font-size: inherit;
+}
+h5 tt,
+h5 code {
+  font-size: inherit;
+}
+h6 tt,
+h6 code {
+  font-size: inherit;
+}
+h1 {
+  font-size: 2.25em;
+  line-height: 1.2;
+  border-bottom: 1px solid #eee;
+}
+h2 {
+  font-size: 1.75em;
+  line-height: 1.225;
+  border-bottom: 1px solid #eee;
+}
+
+h3 {
+  font-size: 1.5em;
+  line-height: 1.43;
+}
+h4 {
+  font-size: 1.25em;
+}
+h5 {
+  font-size: 1em;
+}
+h6 {
+  font-size: 1em;
+  color: #777;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table {
+  margin: 0.8em 0;
+}
+li > ol,
+li > ul {
+  margin: 0 0;
+}
+hr {
+  height: 2px;
+  padding: 0;
+  margin: 16px 0;
+  background-color: #e7e7e7;
+  border: 0 none;
+  overflow: hidden;
+  box-sizing: content-box;
+}
+
+li p.first {
+  display: inline-block;
+}
+ul,
+ol {
+  padding-left: 30px;
+}
+ul:first-child,
+ol:first-child {
+  margin-top: 0;
+}
+ul:last-child,
+ol:last-child {
+  margin-bottom: 0;
+}
+blockquote {
+  border-left: 4px solid #dfe2e5;
+  padding: 0 15px;
+  color: #777777;
+}
+blockquote blockquote {
+  padding-right: 0;
+}
+table {
+  padding: 0;
+  word-break: initial;
+}
+table tr {
+  border: 1px solid #dfe2e5;
+  margin: 0;
+  padding: 0;
+}
+table tr:nth-child(2n),
+thead {
+  background-color: #f8f8f8;
+}
+table th {
+  font-weight: bold;
+  border: 1px solid #dfe2e5;
+  border-bottom: 0;
+  margin: 0;
+  padding: 6px 13px;
+}
+table td {
+  border: 1px solid #dfe2e5;
+  margin: 0;
+  padding: 6px 13px;
+}
+table th:first-child,
+table td:first-child {
+  margin-top: 0;
+}
+table th:last-child,
+table td:last-child {
+  margin-bottom: 0;
+}
+code,
+tt {
+  border: 1px solid #e7eaed;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+  padding: 0;
+  padding: 2px 4px 0px 4px;
+  font-size: 0.9em;
+}
+
+code {
+  background-color: #f3f4f4;
+  padding: 0 2px 0 2px;
+}
+
+@media print {
+  html {
+    font-size: 13px;
+  }
+  table,
+  pre {
+    page-break-inside: avoid;
+  }
+  pre {
+    word-wrap: break-word;
+  }
+}
+
+header, footer{
+    font-family: "Segoe UI", "Arial", sans-serif;
+}

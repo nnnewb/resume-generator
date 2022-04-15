@@ -9,9 +9,10 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/Masterminds/sprig/v3"
 	"github.com/fsnotify/fsnotify"
 	"github.com/nnnewb/resume-generator/pkg/livepreview"
-	"gopkg.in/yaml.v3"
+	"gopkg.in/yaml.v2"
 )
 
 func main() {
@@ -81,6 +82,7 @@ func main() {
 	// render index.html.tpl with
 	http.Handle("/resume", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		tpl := template.New("index.html")
+		tpl = tpl.Funcs(sprig.HtmlFuncMap())
 
 		bytes, err := os.ReadFile(filepath.Join(templateDirPath, "index.html.tpl"))
 		if err != nil {
