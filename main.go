@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"html/template"
+	"io/fs"
 	"log"
 	"net/http"
 	"os"
@@ -81,16 +82,40 @@ func main() {
 
 	// render index.html.tpl with
 	http.Handle("/resume", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		tpl := template.New("index.html")
-		tpl = tpl.Funcs(sprig.HtmlFuncMap())
 
-		bytes, err := os.ReadFile(filepath.Join(templateDirPath, "index.html.tpl"))
+		log.Printf("主模板: %s", filepath.Join(templateDirPath, "index.html.tpl"))
 		if err != nil {
-			w.Write([]byte(fmt.Sprintf("template read error: %v", err)))
+			w.Write([]byte(fmt.Sprintf("template parse error: %v", err)))
 			return
 		}
 
-		tpl, err = tpl.Parse(string(bytes))
+		tpl := template.New(filepath.Join(templateDirPath, "index.html.tpl"))
+		tpl = tpl.Funcs(sprig.HtmlFuncMap())
+
+		err = filepath.WalkDir(templateDirPath, func(path string, d fs.DirEntry, err error) error {
+			if err != nil {
+				return nil
+			}
+
+			if d.IsDir() {
+				return nil
+			}
+
+			if filepath.Ext(path) == ".tpl" {
+				relPath, err := filepath.Rel(templateDirPath, path)
+				if err != nil {
+					return err
+				}
+
+				log.Printf("解析: %s", filepath.Join(templateDirPath, relPath))
+				tpl, err = tpl.ParseFiles(filepath.Join(templateDirPath, relPath))
+				if err != nil {
+					return err
+				}
+			}
+
+			return nil
+		})
 		if err != nil {
 			w.Write([]byte(fmt.Sprintf("template parse error: %v", err)))
 			return

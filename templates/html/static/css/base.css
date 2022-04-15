@@ -6,6 +6,10 @@
   color: gray;
 }
 
+p {
+  text-indent: 2em;
+}
+
 .oss-contribution {
   padding-right: 2em;
   padding-left: 2em;
