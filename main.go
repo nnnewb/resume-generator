@@ -3,16 +3,17 @@ package main
 import (
 	"flag"
 	"fmt"
-	"html/template"
 	"io/fs"
 	"log"
 	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/Masterminds/sprig/v3"
 	"github.com/fsnotify/fsnotify"
 	"github.com/nnnewb/resume-generator/pkg/livepreview"
+	"github.com/nnnewb/resume-generator/pkg/utils"
 	"gopkg.in/yaml.v2"
 )
 
@@ -82,63 +83,13 @@ func main() {
 
 	// render index.html.tpl with
 	http.Handle("/resume", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-
-		log.Printf("主模板: %s", filepath.Join(templateDirPath, "index.html.tpl"))
+		page, err := renderResumeTemplate(templateDirPath, inputYAML)
 		if err != nil {
-			w.Write([]byte(fmt.Sprintf("template parse error: %v", err)))
+			w.Write([]byte(fmt.Sprintf("render template error: %+v", err)))
 			return
 		}
 
-		tpl := template.New(filepath.Join(templateDirPath, "index.html.tpl"))
-		tpl = tpl.Funcs(sprig.HtmlFuncMap())
-
-		err = filepath.WalkDir(templateDirPath, func(path string, d fs.DirEntry, err error) error {
-			if err != nil {
-				return nil
-			}
-
-			if d.IsDir() {
-				return nil
-			}
-
-			if filepath.Ext(path) == ".tpl" {
-				relPath, err := filepath.Rel(templateDirPath, path)
-				if err != nil {
-					return err
-				}
-
-				log.Printf("解析: %s", filepath.Join(templateDirPath, relPath))
-				tpl, err = tpl.ParseFiles(filepath.Join(templateDirPath, relPath))
-				if err != nil {
-					return err
-				}
-			}
-
-			return nil
-		})
-		if err != nil {
-			w.Write([]byte(fmt.Sprintf("template parse error: %v", err)))
-			return
-		}
-
-		yml, err := os.Open(inputYAML)
-		if err != nil {
-			w.Write([]byte(fmt.Sprintf("yaml read error: %v", err)))
-			return
-		}
-
-		data := make(map[string]interface{})
-		err = yaml.NewDecoder(yml).Decode(&data)
-		if err != nil {
-			w.Write([]byte(fmt.Sprintf("yaml decode error: %v", err)))
-			return
-		}
-
-		err = tpl.Execute(w, data)
-		if err != nil {
-			w.Write([]byte(fmt.Sprintf("template execute error: %v", err)))
-			return
-		}
+		w.Write([]byte(page))
 	}))
 
 	log.Printf("服务启动于 http://localhost:8889")
@@ -146,4 +97,55 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+}
+
+func renderResumeTemplate(templateDirPath, resumeDataPath string) (string, error) {
+	tb := utils.NewTemplateBuilder()
+	tb.ExtendFuncs(sprig.HtmlFuncMap())
+	tb.AddFunc("Markdown", utils.Markdown).AddFunc("Unescape", utils.Unescape)
+
+	err := filepath.WalkDir(templateDirPath, func(path string, d fs.DirEntry, err error) error {
+		if err != nil {
+			return nil
+		}
+
+		if d.IsDir() {
+			return nil
+		}
+
+		if filepath.Ext(path) == ".tpl" {
+			tb.AddTemplateFile(path)
+		}
+
+		return nil
+	})
+	if err != nil {
+		return "", err
+	}
+
+	tb.SetMainTemplate("index.html.tpl")
+
+	yml, err := os.Open(resumeDataPath)
+	if err != nil {
+		return "", err
+	}
+
+	data := make(map[string]interface{})
+	err = yaml.NewDecoder(yml).Decode(&data)
+	if err != nil {
+		return "", err
+	}
+
+	tpl, err := tb.BuildHTMLTemplate()
+	if err != nil {
+		return "", err
+	}
+
+	sb := strings.Builder{}
+	err = tpl.Execute(&sb, data)
+	if err != nil {
+		return "", err
+	}
+
+	return sb.String(), nil
 }

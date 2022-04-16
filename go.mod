@@ -7,6 +7,7 @@ require (
 	github.com/fsnotify/fsnotify v1.5.1
 	github.com/gorilla/websocket v1.5.0
 	github.com/pkg/errors v0.9.1
+	github.com/yuin/goldmark v1.4.11
 	gopkg.in/yaml.v2 v2.3.0
 )
 

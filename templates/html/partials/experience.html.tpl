@@ -11,10 +11,14 @@
 
   {{ range .Projects }}
   <div class="row">
-    任职期间负责项目{{.Name}}，工作职责包括{{ .Responsibility}}。
+    <p>任职期间负责项目{{.Name}}，工作职责包括{{ .Responsibility}}。</p>
   </div>
-  <div class="row">{{ .Introduction }}</div>
-  <div class="row">{{ .Achievements }}</div>
+  <div class="row">
+    {{ .Introduction | Markdown | Unescape }}
+  </div>
+  <div class="row">
+    {{ .Achievements | Markdown | Unescape }}
+  </div>
   {{ end }}
   {{ end }}
 </div>
