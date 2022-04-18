@@ -21,46 +21,40 @@ Me:
 Introduction: |
   我是谁；我做过什么；我会哪些技能；
 
+  这里可以使用 `markdown` 语法。
+
 WorkExperience:
 - Organization: 酒厂
   Title: 开发者
   TimeRange:
     From: "2000-01-01"
     To: 现在
-  Projects:
-  - Name: 项目名
-    Stack: 技术栈
-    Introduction: 项目介绍
-    Responsibility: 在项目中的职责范围
-    Achievements: 工作成果
-  - Name: 项目名
-    Stack: 技术栈
-    Introduction: 项目介绍
-    Responsibility: 在项目中的职责范围
-    Achievements: 工作成果
-  - Name: 项目名
-    Stack: 技术栈
-    Introduction: 项目介绍
-    Responsibility: 在项目中的职责范围
-    Achievements: 工作成果
+  Introduction: |
+    工作经历的详细描述，可以使用 `markdown` 语法。
+
+    说明项目背景，工作中遇到的问题，对问题的思考和解决方案，以及事后的评估和反思。
+
+    在工作中取得什么样的成果，比如得到了奖金，发表了文章，产生了多少开源代码，技术改进带来多少盈利或节省多少开支等等。
+
+    总之，向HR介绍自己工作的重要性。
 
 CommunityContribution:
 - Name: 开源项目名
   Link: github.com/your/project
   Stack: 技术栈
-  Introduction: 项目介绍
+  Introduction: 项目介绍，可以使用 `markdown`
 - Name: 开源项目名
   Link: github.com/your/project
   Stack: 技术栈
-  Introduction: 项目介绍
+  Introduction: 项目介绍，可以使用 `markdown`
 - Name: 开源项目名
   Link: github.com/your/project
   Stack: 技术栈
-  Introduction: 项目介绍
+  Introduction: 项目介绍，可以使用 `markdown`
 - Name: 开源项目名
   Link: github.com/your/project
   Stack: 技术栈
-  Introduction: 项目介绍
+  Introduction: 项目介绍，可以使用 `markdown`
 
 Researches:
 - Title: 文章标题

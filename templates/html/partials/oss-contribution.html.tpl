@@ -10,7 +10,7 @@
         <a href="{{ .Link }}">{{ .Name }}</a>
       </p>
       <p class="oss-contribution-stack text-right">{{ .Stack }}</p>
-      <p class="oss-contribution-introduction">{{ .Introduction }}</p>
+      {{ .Introduction | Markdown | Unescape }}
     </div>
     {{ end }}
   </div>

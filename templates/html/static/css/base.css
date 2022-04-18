@@ -1,13 +1,15 @@
+.time-range {
+  font-size: 14px;
+  float: right;
+  color: gray;
+}
+
 .text-right {
   text-align: right;
 }
 
 .text-gray {
   color: gray;
-}
-
-p {
-  text-indent: 2em;
 }
 
 .oss-contribution {
@@ -28,8 +30,4 @@ a {
 .oss-contribution-stack {
   font-size: 14px;
   color: gray;
-}
-
-.oss-contribution-introduction {
-  text-indent: 2em;
 }

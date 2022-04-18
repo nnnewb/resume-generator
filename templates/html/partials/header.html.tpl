@@ -13,8 +13,7 @@
     <p class="text-right">
       GitHub: &ensp;<a
         href="http://github.com/{{ .Me.SocialMedia.GitHub }}/"
-        >{{ .Me.SocialMedia.Github }}</a
-      >
+        >{{ .Me.SocialMedia.GitHub }}</a>
     </p>
   </div>
 </div>

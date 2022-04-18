@@ -148,6 +148,9 @@ dl,
 table {
   margin: 0.8em 0;
 }
+p {
+  text-indent: 2em;
+}
 li > ol,
 li > ul {
   margin: 0 0;
@@ -167,7 +170,7 @@ li p.first {
 }
 ul,
 ol {
-  padding-left: 30px;
+  padding-left: 3.8em;
 }
 ul:first-child,
 ol:first-child {
@@ -229,6 +232,10 @@ tt {
 }
 
 code {
+  font-family: /* 西文字体 */ "Merriweather", "PT Serif", Georgia,
+    "Times New Roman", "STSong", sans-serif;
+  color: #f03b68;
+  font-style: italic;
   background-color: #f3f4f4;
   padding: 0 2px 0 2px;
 }
@@ -246,6 +253,7 @@ code {
   }
 }
 
-header, footer{
-    font-family: "Segoe UI", "Arial", sans-serif;
+header,
+footer {
+  font-family: "Segoe UI", "Arial", sans-serif;
 }

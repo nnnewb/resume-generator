@@ -2,6 +2,6 @@
 <!-- say thanks -->
 <h2>致谢</h2>
 <p>
-  {{ .Thanks }}
+  {{ .Thanks | Markdown | Unescape }}
 </p>
 {{ end }}
